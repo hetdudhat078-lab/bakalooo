@@ -1,34 +1,1253 @@
-# Gradle files
-.gradle/
-build/
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>Bakalooo - Minutes Delivery</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script>
+tailwind.config={theme:{extend:{colors:{g50:'#e6f7ed',g100:'#b8e6cd',g200:'#8ad4ac',g300:'#5cc28b',g400:'#2eb06a',g500:'#0d6b3f',g600:'#0a5532',g700:'#073f25',g800:'#052a18',g900:'#02150c'},fontFamily:{display:['Outfit','sans-serif'],body:['DM Sans','sans-serif']}}}}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#f0f7f2;overflow-x:hidden}
+::-webkit-scrollbar{width:6px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#2eb06a;border-radius:10px}
+.view{display:none;min-height:100vh;flex-direction:column}
+.view.active{display:flex}
+.slide-up{animation:slideUp .35s cubic-bezier(.16,1,.3,1)}
+@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.hero-gradient{background:linear-gradient(135deg,#0d6b3f 0%,#1a9f5c 40%,#2eb06a 70%,#5cc28b 100%)}
+.hero-pattern{background-image:radial-gradient(circle at 20% 80%,rgba(255,255,255,.08) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(255,255,255,.06) 0%,transparent 50%)}
+.cat-scroll::-webkit-scrollbar{display:none}
+.cat-scroll{-ms-overflow-style:none;scrollbar-width:none}
+.offers-scroll::-webkit-scrollbar{display:none}
+.offers-scroll{-ms-overflow-style:none;scrollbar-width:none}
+.product-card{transition:transform .2s ease,box-shadow .2s ease}
+.product-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(13,107,63,.12)}
+.qty-btn{transition:all .15s ease}
+.qty-btn:active{transform:scale(.9)}
+.toast{animation:toastIn .4s cubic-bezier(.16,1,.3,1),toastOut .4s ease 2.2s forwards}
+@keyframes toastIn{from{opacity:0;transform:translateY(-20px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes toastOut{to{opacity:0;transform:translateY(-20px) scale(.95)}}
+.badge-bounce{animation:badgeBounce .3s cubic-bezier(.16,1,.3,1)}
+@keyframes badgeBounce{0%{transform:scale(1)}50%{transform:scale(1.4)}100%{transform:scale(1)}}
+.shimmer{background:linear-gradient(90deg,#e6f7ed 25%,#b8e6cd 50%,#e6f7ed 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.float-anim{animation:float 6s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.pulse-green{animation:pulseG 2s ease-in-out infinite}
+@keyframes pulseG{0%,100%{box-shadow:0 0 0 0 rgba(46,176,106,.4)}70%{box-shadow:0 0 0 12px rgba(46,176,106,0)}}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#2eb06a !important;box-shadow:0 0 0 3px rgba(46,176,106,.15)}
+.modal-overlay{backdrop-filter:blur(4px)}
+@media(min-width:768px){.mobile-frame{max-width:430px;margin:0 auto;box-shadow:0 0 60px rgba(13,107,63,.15);border-radius:24px;overflow:hidden;min-height:100vh}}
+</style>
+</head>
+<body class="bg-g50 font-body">
+<div id="app" class="mobile-frame bg-white relative flex flex-col min-h-screen">
 
-# Local configuration file (sdk path, etc)
-local.properties
+<!-- Toast Container -->
+<div id="toastContainer" class="fixed top-4 left-1/2 -translate-x-1/2 z-[9999] flex flex-col gap-2 items-center pointer-events-none"></div>
 
-# Log/OS Files
-*.log
+<!-- ===== SPLASH ===== -->
+<div id="splashView" class="view active items-center justify-center bg-white" style="min-height:100vh">
+<div class="text-center">
+<div class="w-28 h-28 mx-auto mb-6 rounded-3xl hero-gradient hero-pattern flex items-center justify-center float-anim shadow-lg shadow-g300/30">
+<i class="fas fa-leaf text-white text-5xl"></i>
+</div>
+<h1 class="font-display text-5xl font-900 text-g600 tracking-tight">Bakalooo</h1>
+<p class="text-g400 font-display font-500 mt-2 text-lg">Groceries in minutes</p>
+<div class="mt-10 flex justify-center gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-g400 animate-bounce" style="animation-delay:0s"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-g300 animate-bounce" style="animation-delay:.15s"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-g200 animate-bounce" style="animation-delay:.3s"></div>
+</div>
+</div>
+</div>
 
-# Android Studio generated files and folders
-captures/
-.externalNativeBuild/
-.cxx/
-*.aab
-*.apk
-output-metadata.json
+<!-- ===== LOGIN ===== -->
+<div id="loginView" class="view items-center justify-center bg-white px-6" style="min-height:100vh">
+<div class="w-full max-w-sm slide-up">
+<div class="w-20 h-20 mx-auto mb-5 rounded-2xl hero-gradient flex items-center justify-center shadow-md shadow-g300/30">
+<i class="fas fa-leaf text-white text-3xl"></i>
+</div>
+<h2 class="font-display text-3xl font-800 text-g700 text-center">Welcome Back</h2>
+<p class="text-g400 text-center mt-1 mb-8">Login to your Bakalooo account</p>
+<div class="space-y-4">
+<div>
+<label class="text-sm font-600 text-g600 mb-1.5 block">Email Address</label>
+<div class="relative"><i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-g300"></i>
+<input id="loginEmail" type="email" placeholder="you@email.com" class="w-full pl-11 pr-4 py-3.5 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 transition-all"></div>
+</div>
+<div>
+<label class="text-sm font-600 text-g600 mb-1.5 block">Password</label>
+<div class="relative"><i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-g300"></i>
+<input id="loginPass" type="password" placeholder="Enter password" class="w-full pl-11 pr-4 py-3.5 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 transition-all"></div>
+</div>
+<button onclick="handleLogin()" class="w-full py-3.5 hero-gradient text-white font-display font-700 rounded-xl shadow-lg shadow-g400/30 active:scale-[.97] transition-transform text-lg">Login</button>
+<p class="text-center text-g400 text-sm">Don't have an account? <span onclick="showView('signupView')" class="text-g500 font-600 cursor-pointer hover:underline">Sign Up</span></p>
+</div>
+</div>
+</div>
 
-# IntelliJ
-*.iml
-.idea/
-misc.xml
-deploymentTargetDropDown.xml
-render.experimental.xml
+<!-- ===== SIGNUP ===== -->
+<div id="signupView" class="view items-center justify-center bg-white px-6" style="min-height:100vh">
+<div class="w-full max-w-sm slide-up">
+<div class="w-20 h-20 mx-auto mb-5 rounded-2xl hero-gradient flex items-center justify-center shadow-md shadow-g300/30">
+<i class="fas fa-user-plus text-white text-3xl"></i>
+</div>
+<h2 class="font-display text-3xl font-800 text-g700 text-center">Create Account</h2>
+<p class="text-g400 text-center mt-1 mb-6">Join Bakalooo for quick deliveries</p>
+<div class="space-y-3">
+<div class="grid grid-cols-2 gap-3">
+<div><label class="text-xs font-600 text-g600 mb-1 block">First Name</label>
+<input id="signupFirst" type="text" placeholder="John" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 transition-all text-sm"></div>
+<div><label class="text-xs font-600 text-g600 mb-1 block">Last Name</label>
+<input id="signupLast" type="text" placeholder="Doe" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 transition-all text-sm"></div>
+</div>
+<div><label class="text-xs font-600 text-g600 mb-1 block">Email Address</label>
+<input id="signupEmail" type="email" placeholder="you@email.com" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 transition-all text-sm"></div>
+<div><label class="text-xs font-600 text-g600 mb-1 block">Phone Number</label>
+<input id="signupPhone" type="tel" placeholder="+91 98765 43210" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 transition-all text-sm"></div>
+<div><label class="text-xs font-600 text-g600 mb-1 block">Password</label>
+<input id="signupPass" type="password" placeholder="Min 6 characters" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 transition-all text-sm"></div>
+<div><label class="text-xs font-600 text-g600 mb-1 block">Delivery Address</label>
+<textarea id="signupAddress" rows="2" placeholder="House No, Street, Area, Landmark..." class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 transition-all text-sm resize-none"></textarea></div>
+<button onclick="handleSignup()" class="w-full py-3.5 hero-gradient text-white font-display font-700 rounded-xl shadow-lg shadow-g400/30 active:scale-[.97] transition-transform text-lg mt-2">Create Account</button>
+<p class="text-center text-g400 text-sm">Already have an account? <span onclick="showView('loginView')" class="text-g500 font-600 cursor-pointer hover:underline">Login</span></p>
+</div>
+</div>
+</div>
 
-# Keystore files
-*.jks
-*.keystore
+<!-- ===== HOME (Customer) ===== -->
+<div id="homeView" class="view bg-g50">
+<!-- Top Bar -->
+<div class="bg-white sticky top-0 z-50 shadow-sm">
+<div class="flex items-center justify-between px-4 py-3">
+<div class="flex items-center gap-2">
+<div class="w-9 h-9 rounded-xl hero-gradient flex items-center justify-center"><i class="fas fa-leaf text-white text-sm"></i></div>
+<span class="font-display font-800 text-xl text-g600">Bakalooo</span>
+</div>
+<div class="flex items-center gap-3">
+<button onclick="showView('searchView')" class="w-9 h-9 rounded-full bg-g50 flex items-center justify-center"><i class="fas fa-search text-g500 text-sm"></i></button>
+<button onclick="showView('cartView')" class="relative w-9 h-9 rounded-full bg-g50 flex items-center justify-center">
+<i class="fas fa-shopping-bag text-g500 text-sm"></i>
+<span id="cartBadgeHome" class="hidden absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-[10px] font-700 rounded-full flex items-center justify-center">0</span>
+</button>
+</div>
+</div>
+<!-- Location Bar -->
+<div onclick="showView('addressView')" class="flex items-center gap-2 px-4 pb-3 cursor-pointer group">
+<div class="w-7 h-7 rounded-full bg-g100 flex items-center justify-center"><i class="fas fa-location-dot text-g500 text-xs"></i></div>
+<div class="flex-1 min-w-0">
+<p class="text-[10px] text-g300 font-500 uppercase tracking-wider">Deliver to</p>
+<p id="homeAddress" class="text-sm font-600 text-g700 truncate">Select delivery address...</p>
+</div>
+<i class="fas fa-chevron-down text-g300 text-xs group-hover:text-g500 transition-colors"></i>
+</div>
+</div>
 
-# Google Services (e.g. APIs or Firebase)
-google-services.json
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto pb-24">
+<!-- Hero Banner -->
+<div class="mx-4 mt-3 rounded-2xl overflow-hidden hero-gradient hero-pattern relative" style="min-height:180px">
+<div class="absolute inset-0 flex flex-col justify-center px-6 z-10">
+<div class="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 w-fit mb-3">
+<span class="w-2 h-2 rounded-full bg-green-300 pulse-green"></span>
+<span class="text-white text-xs font-600">Delivery in 10 minutes</span>
+</div>
+<h2 class="font-display text-white text-3xl font-900 leading-tight">Fresh Fruits &<br>Vegetables</h2>
+<p class="text-green-100 text-sm mt-2 font-400">Farm fresh produce at your doorstep</p>
+<button onclick="scrollToCat('fruits')" class="mt-4 bg-white text-g600 font-display font-700 px-5 py-2.5 rounded-xl text-sm shadow-lg active:scale-95 transition-transform">Shop Now <i class="fas fa-arrow-right ml-1 text-xs"></i></button>
+</div>
+<div class="absolute right-0 bottom-0 opacity-20 text-[180px] leading-none pointer-events-none select-none">🥬</div>
+</div>
 
-# Android Profiling
-*.hprof
+<!-- Offers Strip -->
+<div id="offersStrip" class="mt-4"></div>
+
+<!-- Categories -->
+<div class="mt-5 px-4">
+<h3 class="font-display font-700 text-lg text-g700 mb-3">Shop by Category</h3>
+<div id="catGrid" class="grid grid-cols-4 gap-3"></div>
+</div>
+
+<!-- Products Section -->
+<div id="productsSection" class="mt-6 px-4"></div>
+</div>
+
+<!-- Bottom Nav -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] bg-white border-t border-g100 z-50 flex items-center justify-around py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
+<button onclick="showView('homeView')" class="flex flex-col items-center gap-0.5 px-3 py-1 text-g500 nav-btn" data-nav="home"><i class="fas fa-home text-lg"></i><span class="text-[10px] font-600">Home</span></button>
+<button onclick="showView('searchView')" class="flex flex-col items-center gap-0.5 px-3 py-1 text-g300 nav-btn" data-nav="search"><i class="fas fa-search text-lg"></i><span class="text-[10px] font-600">Search</span></button>
+<button onclick="showView('cartView')" class="flex flex-col items-center gap-0.5 px-3 py-1 text-g300 nav-btn relative" data-nav="cart"><i class="fas fa-shopping-bag text-lg"></i><span class="text-[10px] font-600">Cart</span><span id="cartBadgeNav" class="hidden absolute -top-0.5 right-1 w-4.5 h-4.5 bg-red-500 text-white text-[9px] font-700 rounded-full flex items-center justify-center min-w-[18px] h-[18px]">0</span></button>
+<button onclick="showView('ordersView')" class="flex flex-col items-center gap-0.5 px-3 py-1 text-g300 nav-btn" data-nav="orders"><i class="fas fa-receipt text-lg"></i><span class="text-[10px] font-600">Orders</span></button>
+<button onclick="showView('profileView')" class="flex flex-col items-center gap-0.5 px-3 py-1 text-g300 nav-btn" data-nav="profile"><i class="fas fa-user text-lg"></i><span class="text-[10px] font-600">Profile</span></button>
+</nav>
+</div>
+
+<!-- ===== SEARCH ===== -->
+<div id="searchView" class="view bg-white">
+<div class="bg-white sticky top-0 z-40 px-4 py-3 flex items-center gap-3 border-b border-g100">
+<button onclick="showView('homeView')" class="w-9 h-9 rounded-full bg-g50 flex items-center justify-center flex-shrink-0"><i class="fas fa-arrow-left text-g600 text-sm"></i></button>
+<div class="flex-1 relative"><i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-g300 text-sm"></i>
+<input id="searchInput" type="text" placeholder="Search for fruits, vegetables..." class="w-full pl-10 pr-4 py-3 bg-g50 border-2 border-transparent rounded-xl text-g700 placeholder-g300 transition-all" oninput="handleSearch(this.value)"></div>
+</div>
+<div id="searchResults" class="flex-1 overflow-y-auto px-4 py-4 pb-24"></div>
+</div>
+
+<!-- ===== CART ===== -->
+<div id="cartView" class="view bg-g50">
+<div class="bg-white sticky top-0 z-40 px-4 py-3 flex items-center gap-3 border-b border-g100">
+<button onclick="showView('homeView')" class="w-9 h-9 rounded-full bg-g50 flex items-center justify-center flex-shrink-0"><i class="fas fa-arrow-left text-g600 text-sm"></i></button>
+<h2 class="font-display font-700 text-lg text-g700">My Cart</h2>
+<span id="cartCount" class="text-sm text-g400 ml-1"></span>
+</div>
+<div id="cartContent" class="flex-1 overflow-y-auto px-4 py-4 pb-56"></div>
+<div id="cartFooter" class="hidden fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] bg-white border-t border-g100 px-4 py-3 z-40"></div>
+</div>
+
+<!-- ===== CHECKOUT ===== -->
+<div id="checkoutView" class="view bg-g50">
+<div class="bg-white sticky top-0 z-40 px-4 py-3 flex items-center gap-3 border-b border-g100">
+<button onclick="showView('cartView')" class="w-9 h-9 rounded-full bg-g50 flex items-center justify-center flex-shrink-0"><i class="fas fa-arrow-left text-g600 text-sm"></i></button>
+<h2 class="font-display font-700 text-lg text-g700">Checkout</h2>
+</div>
+<div id="checkoutContent" class="flex-1 overflow-y-auto px-4 py-4 pb-56"></div>
+<div id="checkoutFooter" class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] bg-white border-t border-g100 px-4 py-3 z-40"></div>
+</div>
+
+<!-- ===== ORDER SUCCESS ===== -->
+<div id="successView" class="view items-center justify-center bg-white px-6" style="min-height:100vh">
+<div class="text-center slide-up">
+<div class="w-24 h-24 mx-auto mb-6 rounded-full bg-g50 flex items-center justify-center"><i class="fas fa-check-circle text-g400 text-5xl"></i></div>
+<h2 class="font-display text-3xl font-800 text-g700">Order Placed!</h2>
+<p class="text-g400 mt-2">Your order will be delivered in 10 minutes</p>
+<p id="successOrderId" class="text-g300 text-sm mt-1"></p>
+<div class="mt-8 space-y-3">
+<button onclick="showView('ordersView')" class="w-full py-3.5 border-2 border-g200 text-g600 font-display font-700 rounded-xl">View Orders</button>
+<button onclick="showView('homeView')" class="w-full py-3.5 hero-gradient text-white font-display font-700 rounded-xl shadow-lg shadow-g400/30">Back to Home</button>
+</div>
+</div>
+</div>
+
+<!-- ===== ORDERS ===== -->
+<div id="ordersView" class="view bg-g50">
+<div class="bg-white sticky top-0 z-40 px-4 py-3 flex items-center gap-3 border-b border-g100">
+<button onclick="showView('homeView')" class="w-9 h-9 rounded-full bg-g50 flex items-center justify-center flex-shrink-0"><i class="fas fa-arrow-left text-g600 text-sm"></i></button>
+<h2 class="font-display font-700 text-lg text-g700">My Orders</h2>
+</div>
+<div id="ordersContent" class="flex-1 overflow-y-auto px-4 py-4 pb-24"></div>
+</div>
+
+<!-- ===== PROFILE ===== -->
+<div id="profileView" class="view bg-g50">
+<div class="bg-white px-4 py-5 border-b border-g100">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-2xl hero-gradient flex items-center justify-center text-white font-display font-800 text-2xl" id="profileAvatar">J</div>
+<div><h2 id="profileName" class="font-display font-700 text-lg text-g700">John Doe</h2><p id="profileEmail" class="text-sm text-g400">john@email.com</p><p id="profilePhone" class="text-sm text-g400">+91 98765 43210</p></div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto px-4 py-4 pb-24 space-y-2">
+<button onclick="showView('addressView')" class="w-full flex items-center gap-4 bg-white p-4 rounded-xl active:bg-g50 transition-colors">
+<div class="w-10 h-10 rounded-xl bg-g50 flex items-center justify-center"><i class="fas fa-location-dot text-g500"></i></div>
+<div class="flex-1 text-left"><p class="font-600 text-g700 text-sm">Delivery Address</p><p id="profileAddr" class="text-xs text-g400 truncate mt-0.5">Add your address</p></div>
+<i class="fas fa-chevron-right text-g300 text-sm"></i>
+</button>
+<button onclick="showView('ordersView')" class="w-full flex items-center gap-4 bg-white p-4 rounded-xl active:bg-g50 transition-colors">
+<div class="w-10 h-10 rounded-xl bg-g50 flex items-center justify-center"><i class="fas fa-receipt text-g500"></i></div>
+<div class="flex-1 text-left"><p class="font-600 text-g700 text-sm">My Orders</p><p class="text-xs text-g400 mt-0.5">View your order history</p></div>
+<i class="fas fa-chevron-right text-g300 text-sm"></i>
+</button>
+<div class="pt-4">
+<button onclick="handleLogout()" class="w-full py-3.5 border-2 border-red-200 text-red-500 font-display font-600 rounded-xl active:bg-red-50 transition-colors"><i class="fas fa-sign-out-alt mr-2"></i>Logout</button>
+</div>
+</div>
+</div>
+
+<!-- ===== ADDRESS ===== -->
+<div id="addressView" class="view bg-white">
+<div class="bg-white sticky top-0 z-40 px-4 py-3 flex items-center gap-3 border-b border-g100">
+<button onclick="goBack()" class="w-9 h-9 rounded-full bg-g50 flex items-center justify-center flex-shrink-0"><i class="fas fa-arrow-left text-g600 text-sm"></i></button>
+<h2 class="font-display font-700 text-lg text-g700">Delivery Address</h2>
+</div>
+<div class="flex-1 overflow-y-auto px-4 py-4 pb-24">
+<div class="space-y-4">
+<div><label class="text-xs font-600 text-g600 mb-1.5 block">Full Name</label>
+<input id="addrName" type="text" placeholder="Your full name" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 transition-all text-sm"></div>
+<div><label class="text-xs font-600 text-g600 mb-1.5 block">Phone Number</label>
+<input id="addrPhone" type="tel" placeholder="+91 98765 43210" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 transition-all text-sm"></div>
+<div><label class="text-xs font-600 text-g600 mb-1.5 block">Address Line</label>
+<textarea id="addrLine" rows="3" placeholder="House/Flat No., Building, Street, Area..." class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 transition-all text-sm resize-none"></textarea></div>
+<div class="grid grid-cols-2 gap-3">
+<div><label class="text-xs font-600 text-g600 mb-1.5 block">City</label>
+<input id="addrCity" type="text" placeholder="City" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 transition-all text-sm"></div>
+<div><label class="text-xs font-600 text-g600 mb-1.5 block">Pincode</label>
+<input id="addrPin" type="text" placeholder="360001" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 transition-all text-sm"></div>
+</div>
+<button onclick="saveAddress()" class="w-full py-3.5 hero-gradient text-white font-display font-700 rounded-xl shadow-lg shadow-g400/30 active:scale-[.97] transition-transform mt-2">Save Address</button>
+</div>
+</div>
+</div>
+
+<!-- ===== ADMIN DASHBOARD ===== -->
+<div id="adminView" class="view bg-g50">
+<div class="bg-white sticky top-0 z-40 px-4 py-3 flex items-center justify-between border-b border-g100">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg hero-gradient flex items-center justify-center"><i class="fas fa-leaf text-white text-xs"></i></div>
+<span class="font-display font-800 text-g600">Admin Panel</span>
+</div>
+<button onclick="handleLogout()" class="text-red-400 text-sm font-600"><i class="fas fa-sign-out-alt mr-1"></i>Logout</button>
+</div>
+<div class="flex-1 overflow-y-auto px-4 py-4 pb-24">
+<!-- Stats -->
+<div class="grid grid-cols-3 gap-3 mb-5" id="adminStats"></div>
+<!-- Tabs -->
+<div class="flex bg-white rounded-xl p-1 mb-5 gap-1">
+<button onclick="switchAdminTab('products')" class="admin-tab flex-1 py-2.5 rounded-lg text-sm font-600 transition-all" data-tab="products">Products</button>
+<button onclick="switchAdminTab('offers')" class="admin-tab flex-1 py-2.5 rounded-lg text-sm font-600 transition-all" data-tab="offers">Offers</button>
+<button onclick="switchAdminTab('coupons')" class="admin-tab flex-1 py-2.5 rounded-lg text-sm font-600 transition-all" data-tab="coupons">Coupons</button>
+<button onclick="switchAdminTab('orders')" class="admin-tab flex-1 py-2.5 rounded-lg text-sm font-600 transition-all" data-tab="orders">Orders</button>
+</div>
+<div id="adminTabContent"></div>
+</div>
+</div>
+
+<!-- ===== MODAL (Add/Edit Product) ===== -->
+<div id="productModal" class="hidden fixed inset-0 z-[100] flex items-end sm:items-center justify-center">
+<div class="modal-overlay absolute inset-0 bg-black/40" onclick="closeProductModal()"></div>
+<div class="relative bg-white w-full max-w-[430px] max-h-[90vh] rounded-t-3xl sm:rounded-3xl overflow-y-auto slide-up">
+<div class="sticky top-0 bg-white px-5 py-4 border-b border-g100 flex items-center justify-between z-10">
+<h3 id="modalTitle" class="font-display font-700 text-lg text-g700">Add Product</h3>
+<button onclick="closeProductModal()" class="w-8 h-8 rounded-full bg-g50 flex items-center justify-center"><i class="fas fa-times text-g400 text-sm"></i></button>
+</div>
+<div class="p-5 space-y-3">
+<input type="hidden" id="editProductId">
+<div><label class="text-xs font-600 text-g600 mb-1 block">Product Name</label>
+<input id="pName" type="text" placeholder="e.g. Organic Tomatoes" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 text-sm"></div>
+<div class="grid grid-cols-2 gap-3">
+<div><label class="text-xs font-600 text-g600 mb-1 block">Category</label>
+<select id="pCat" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 text-sm"></select></div>
+<div><label class="text-xs font-600 text-g600 mb-1 block">Unit</label>
+<select id="pUnit" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 text-sm">
+<option value="kg">kg</option><option value="g">g</option><option value="pc">piece</option><option value="dozen">dozen</option><option value="pack">pack</option><option value="bunch">bunch</option><option value="litre">litre</option><option value="ml">ml</option>
+</select></div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div><label class="text-xs font-600 text-g600 mb-1 block">Price (₹)</label>
+<input id="pPrice" type="number" placeholder="49" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 text-sm"></div>
+<div><label class="text-xs font-600 text-g600 mb-1 block">MRP (₹)</label>
+<input id="pMrp" type="number" placeholder="65" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 text-sm"></div>
+</div>
+<div><label class="text-xs font-600 text-g600 mb-1 block">Image Keyword (for photo)</label>
+<input id="pImg" type="text" placeholder="e.g. tomato, apple, bread" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 text-sm">
+<p class="text-[10px] text-g300 mt-1">Single word used to fetch product image</p></div>
+<div id="pImgPreview" class="hidden"><label class="text-xs font-600 text-g600 mb-1 block">Preview</label>
+<img id="pImgPreviewSrc" class="w-20 h-20 rounded-xl object-cover border-2 border-g100"></div>
+<button onclick="previewProductImg()" class="text-sm text-g500 font-600"><i class="fas fa-eye mr-1"></i>Preview Image</button>
+<div><label class="text-xs font-600 text-g600 mb-1 block">Description</label>
+<textarea id="pDesc" rows="2" placeholder="Brief description..." class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 text-sm resize-none"></textarea></div>
+<button onclick="saveProduct()" class="w-full py-3.5 hero-gradient text-white font-display font-700 rounded-xl shadow-lg shadow-g400/30 active:scale-[.97] transition-transform">Save Product</button>
+</div>
+</div>
+</div>
+
+<!-- ===== MODAL (Add Offer) ===== -->
+<div id="offerModal" class="hidden fixed inset-0 z-[100] flex items-end sm:items-center justify-center">
+<div class="modal-overlay absolute inset-0 bg-black/40" onclick="closeOfferModal()"></div>
+<div class="relative bg-white w-full max-w-[430px] rounded-t-3xl sm:rounded-3xl overflow-y-auto slide-up">
+<div class="sticky top-0 bg-white px-5 py-4 border-b border-g100 flex items-center justify-between z-10">
+<h3 class="font-display font-700 text-lg text-g700">Add Offer</h3>
+<button onclick="closeOfferModal()" class="w-8 h-8 rounded-full bg-g50 flex items-center justify-center"><i class="fas fa-times text-g400 text-sm"></i></button>
+</div>
+<div class="p-5 space-y-3">
+<div><label class="text-xs font-600 text-g600 mb-1 block">Offer Title</label>
+<input id="oTitle" type="text" placeholder="e.g. 50% Off on Fruits" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 text-sm"></div>
+<div><label class="text-xs font-600 text-g600 mb-1 block">Description</label>
+<input id="oDesc" type="text" placeholder="Short description" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 text-sm"></div>
+<div class="grid grid-cols-2 gap-3">
+<div><label class="text-xs font-600 text-g600 mb-1 block">Discount %</label>
+<input id="oDiscount" type="number" placeholder="30" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 text-sm"></div>
+<div><label class="text-xs font-600 text-g600 mb-1 block">Background Color</label>
+<input id="oColor" type="color" value="#0d6b3f" class="w-full h-[46px] rounded-xl border-2 border-g100 cursor-pointer"></div>
+</div>
+<div><label class="text-xs font-600 text-g600 mb-1 block">Applicable Category (leave empty for all)</label>
+<select id="oCat" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 text-sm">
+<option value="">All Categories</option>
+</select></div>
+<button onclick="saveOffer()" class="w-full py-3.5 hero-gradient text-white font-display font-700 rounded-xl shadow-lg shadow-g400/30 active:scale-[.97] transition-transform">Save Offer</button>
+</div>
+</div>
+</div>
+
+<!-- ===== MODAL (Add Coupon) ===== -->
+<div id="couponModal" class="hidden fixed inset-0 z-[100] flex items-end sm:items-center justify-center">
+<div class="modal-overlay absolute inset-0 bg-black/40" onclick="closeCouponModal()"></div>
+<div class="relative bg-white w-full max-w-[430px] rounded-t-3xl sm:rounded-3xl overflow-y-auto slide-up">
+<div class="sticky top-0 bg-white px-5 py-4 border-b border-g100 flex items-center justify-between z-10">
+<h3 class="font-display font-700 text-lg text-g700">Add Coupon</h3>
+<button onclick="closeCouponModal()" class="w-8 h-8 rounded-full bg-g50 flex items-center justify-center"><i class="fas fa-times text-g400 text-sm"></i></button>
+</div>
+<div class="p-5 space-y-3">
+<div><label class="text-xs font-600 text-g600 mb-1 block">Coupon Code</label>
+<input id="cCode" type="text" placeholder="e.g. BAKALOO50" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 text-sm uppercase"></div>
+<div class="grid grid-cols-2 gap-3">
+<div><label class="text-xs font-600 text-g600 mb-1 block">Discount Type</label>
+<select id="cType" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 text-sm">
+<option value="percent">Percentage (%)</option><option value="flat">Flat Amount (₹)</option>
+</select></div>
+<div><label class="text-xs font-600 text-g600 mb-1 block">Value</label>
+<input id="cValue" type="number" placeholder="50" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 text-sm"></div>
+</div>
+<div><label class="text-xs font-600 text-g600 mb-1 block">Min Order Value (₹)</label>
+<input id="cMin" type="number" placeholder="199" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 text-sm"></div>
+<div><label class="text-xs font-600 text-g600 mb-1 block">Max Discount (₹, leave 0 for no limit)</label>
+<input id="cMax" type="number" placeholder="100" value="0" class="w-full px-4 py-3 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 text-sm"></div>
+<button onclick="saveCoupon()" class="w-full py-3.5 hero-gradient text-white font-display font-700 rounded-xl shadow-lg shadow-g400/30 active:scale-[.97] transition-transform">Save Coupon</button>
+</div>
+</div>
+</div>
+
+</div><!-- /app -->
+
+<script>
+/* ===========================
+   DATA & STATE
+   =========================== */
+const ADMIN_EMAIL='hetdudhat078@gmail.com',ADMIN_PASS='hetdudhat9901';
+const CATEGORIES=[
+{id:'fruits',name:'Fruits',icon:'fa-apple-whole',color:'#e74c3c'},
+{id:'vegetables',name:'Vegetables',icon:'fa-carrot',color:'#27ae60'},
+{id:'dairy',name:'Dairy',icon:'fa-cheese',color:'#f39c12'},
+{id:'bakery',name:'Bakery',icon:'fa-bread-slice',color:'#d35400'},
+{id:'beverages',name:'Beverages',icon:'fa-mug-hot',color:'#2980b9'},
+{id:'snacks',name:'Snacks',icon:'fa-cookie-bite',color:'#8e44ad'},
+{id:'staples',name:'Staples',icon:'fa-wheat-awn',color:'#c0952c'},
+{id:'cleaning',name:'Cleaning',icon:'fa-spray-can-sparkles',color:'#16a085'}
+];
+
+const DEFAULT_PRODUCTS=[
+{id:1,name:'Banana',cat:'fruits',unit:'dozen',price:49,mrp:65,img:'banana',desc:'Fresh yellow bananas'},
+{id:2,name:'Apple',cat:'fruits',unit:'kg',price:189,mrp:240,img:'apple-fruit',desc:'Premium Kashmiri apples'},
+{id:3,name:'Mango',cat:'fruits',unit:'kg',price:149,mrp:200,img:'mango-fruit',desc:'Alphonso mangoes'},
+{id:4,name:'Orange',cat:'fruits',unit:'kg',price:79,mrp:99,img:'orange-fruit',desc:'Sweet Nagpur oranges'},
+{id:5,name:'Grapes',cat:'fruits',unit:'kg',price:89,mrp:120,img:'grapes-fruit',desc:'Green seedless grapes'},
+{id:6,name:'Watermelon',cat:'fruits',unit:'kg',price:39,mrp:50,img:'watermelon',desc:'Refreshing watermelon'},
+{id:7,name:'Tomato',cat:'vegetables',unit:'kg',price:39,mrp:55,img:'tomato-vegetable',desc:'Fresh red tomatoes'},
+{id:8,name:'Potato',cat:'vegetables',unit:'kg',price:29,mrp:40,img:'potato-vegetable',desc:'Fresh potatoes'},
+{id:9,name:'Onion',cat:'vegetables',unit:'kg',price:35,mrp:50,img:'onion-vegetable',desc:'Fresh onions'},
+{id:10,name:'Capsicum',cat:'vegetables',unit:'kg',price:79,mrp:110,img:'capsicum',desc:'Green capsicum'},
+{id:11,name:'Carrot',cat:'vegetables',unit:'kg',price:49,mrp:65,img:'carrot-vegetable',desc:'Fresh orange carrots'},
+{id:12,name:'Spinach',cat:'vegetables',unit:'bunch',price:30,mrp:40,img:'spinach-vegetable',desc:'Fresh palak leaves'},
+{id:13,name:'Milk',cat:'dairy',unit:'litre',price:62,mrp:68,img:'milk-bottle',desc:'Full cream fresh milk'},
+{id:14,name:'Curd',cat:'dairy',unit:'kg',price:55,mrp:65,img:'curd-yogurt',desc:'Thick creamy curd'},
+{id:15,name:'Paneer',cat:'dairy',unit:'kg',price:260,mrp:320,img:'paneer-cheese',desc:'Fresh cottage cheese'},
+{id:16,name:'Butter',cat:'dairy',unit:'pack',price:55,mrp:60,img:'butter-block',desc:'Amul butter pack'},
+{id:17,name:'Bread',cat:'bakery',unit:'pack',price:40,mrp:45,img:'bread-loaf',desc:'Soft white bread'},
+{id:18,name:'Cookies',cat:'bakery',unit:'pack',price:30,mrp:40,img:'cookies-bakery',desc:'Butter cookies'},
+{id:19,name:'Cake',cat:'bakery',unit:'pc',price:199,mrp:250,img:'chocolate-cake',desc:'Chocolate sponge cake'},
+{id:20,name:'Pastry',cat:'bakery',unit:'pc',price:49,mrp:60,img:'pastry-bakery',desc:'Cream pastry'},
+{id:21,name:'Tea',cat:'beverages',unit:'pack',price:120,mrp:150,img:'tea-packets',desc:'Tata Gold tea'},
+{id:22,name:'Coffee',cat:'beverages',unit:'pack',price:199,mrp:250,img:'coffee-powder',desc:'Nescafe classic'},
+{id:23,name:'Juice',cat:'beverages',unit:'litre',price:89,mrp:110,img:'fruit-juice',desc:'Mixed fruit juice'},
+{id:24,name:'Water',cat:'beverages',unit:'litre',price:20,mrp:25,img:'bottled-water',desc:'Bisleri water bottle'},
+{id:25,name:'Chips',cat:'snacks',unit:'pack',price:20,mrp:30,img:'potato-chips',desc:'Lays classic salted'},
+{id:26,name:'Biscuits',cat:'snacks',unit:'pack',price:30,mrp:35,img:'biscuits-snack',desc:'Parle-G biscuits'},
+{id:27,name:'Noodles',cat:'snacks',unit:'pack',price:14,mrp:20,img:'instant-noodles',desc:'Maggi noodles'},
+{id:28,name:'Chocolate',cat:'snacks',unit:'pc',price:40,mrp:50,img:'chocolate-bar',desc:'Dairy Milk chocolate'},
+{id:29,name:'Rice',cat:'staples',unit:'kg',price:65,mrp:80,img:'rice-grain',desc:'Basmati rice'},
+{id:30,name:'Wheat Flour',cat:'staples',unit:'kg',price:42,mrp:55,img:'wheat-flour',desc:'Atta whole wheat'},
+{id:31,name:'Sugar',cat:'staples',unit:'kg',price:44,mrp:50,img:'sugar-cube',desc:'Refined sugar'},
+{id:32,name:'Dal',cat:'staples',unit:'kg',price:89,mrp:120,img:'lentils-dal',desc:'Toor dal'},
+{id:33,name:'Detergent',cat:'cleaning',unit:'kg',price:120,mrp:150,img:'detergent-powder',desc:'Surf Excel detergent'},
+{id:34,name:'Dishwash',cat:'cleaning',unit:'pack',price:99,mrp:120,img:'dishwash-liquid',desc:'Vim dishwash gel'},
+{id:35,name:'Floor Cleaner',cat:'cleaning',unit:'litre',price:109,mrp:135,img:'floor-cleaner',desc:'Lizol floor cleaner'},
+{id:36,name:'Handwash',cat:'cleaning',unit:'pack',price:49,mrp:60,img:'handwash-soap',desc:'Lifebuoy handwash'},
+];
+
+const DEFAULT_OFFERS=[
+{id:1,title:'50% Off on Fruits',desc:'Fresh seasonal fruits at half price',discount:50,color:'#0d6b3f',cat:'fruits'},
+{id:2,title:'Flat ₹30 Off on Dairy',desc:'On all dairy products above ₹100',discount:30,color:'#d35400',cat:'dairy'},
+{id:3,title:'Buy 1 Get 1 Free Snacks',desc:'On all snacks this weekend',discount:50,color:'#8e44ad',cat:'snacks'},
+];
+
+const DEFAULT_COUPONS=[
+{id:1,code:'BAKALOO50',type:'percent',value:50,minOrder:299,maxDiscount:150},
+{id:2,code:'FLAT100',type:'flat',value:100,minOrder:499,maxDiscount:0},
+{id:3,code:'NEWUSER',type:'percent',value:20,minOrder:199,maxDiscount:75},
+];
+
+let state={user:null,cart:[],products:[],offers:[],coupons:[],orders:[],nextPid:37,nextOid:4,nextCid:4,nextOrId:1001,appliedCoupon:null,adminTab:'products',prevView:'homeView'};
+
+/* ===========================
+   LOCAL STORAGE
+   =========================== */
+function loadState(){
+try{
+const s=localStorage.getItem('bakalooo_state');
+if(s){const p=JSON.parse(s);Object.assign(state,p);}
+if(!state.products||!state.products.length)state.products=JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+if(!state.offers||!state.offers.length)state.offers=JSON.parse(JSON.stringify(DEFAULT_OFFERS));
+if(!state.coupons||!state.coupons.length)state.coupons=JSON.parse(JSON.stringify(DEFAULT_COUPONS));
+}catch(e){state.products=JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));state.offers=JSON.parse(JSON.stringify(DEFAULT_OFFERS));state.coupons=JSON.parse(JSON.stringify(DEFAULT_COUPONS));}
+}
+function saveState(){try{localStorage.setItem('bakalooo_state',JSON.stringify(state));}catch(e){}}
+
+/* ===========================
+   TOAST
+   =========================== */
+function toast(msg,type='success'){
+const c=document.getElementById('toastContainer');
+const t=document.createElement('div');
+t.className=`toast pointer-events-auto px-5 py-3 rounded-xl shadow-lg text-sm font-600 flex items-center gap-2 ${type==='success'?'bg-g600 text-white':type==='error'?'bg-red-500 text-white':'bg-g100 text-g700'}`;
+t.innerHTML=`<i class="fas ${type==='success'?'fa-check-circle':type==='error'?'fa-exclamation-circle':'fa-info-circle'}"></i>${msg}`;
+c.appendChild(t);
+setTimeout(()=>t.remove(),2800);
+}
+
+/* ===========================
+   VIEW MANAGEMENT
+   =========================== */
+function showView(id){
+state.prevView=document.querySelector('.view.active')?.id||'homeView';
+document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+const el=document.getElementById(id);
+if(el){el.classList.add('active');el.scrollTop=0;}
+updateNav(id);
+if(id==='homeView')renderHome();
+if(id==='cartView')renderCart();
+if(id==='searchView'){document.getElementById('searchInput').focus();renderSearch('');}
+if(id==='checkoutView')renderCheckout();
+if(id==='ordersView')renderOrders();
+if(id==='profileView')renderProfile();
+if(id==='adminView')renderAdmin();
+if(id==='addressView')populateAddress();
+}
+
+function goBack(){showView(state.prevView);}
+function updateNav(id){
+document.querySelectorAll('.nav-btn').forEach(b=>{
+const n=b.dataset.nav;
+b.classList.toggle('text-g500',n==='home'&&id==='homeView'||n==='search'&&id==='searchView'||n==='cart'&&id==='cartView'||n==='orders'&&id==='ordersView'||n==='profile'&&id==='profileView');
+b.classList.toggle('text-g300',!(n==='home'&&id==='homeView'||n==='search'&&id==='searchView'||n==='cart'&&id==='cartView'||n==='orders'&&id==='ordersView'||n==='profile'&&id==='profileView'));
+});
+updateCartBadge();
+}
+
+function updateCartBadge(){
+const cnt=state.cart.reduce((s,i)=>s+i.qty,0);
+['cartBadgeHome','cartBadgeNav'].forEach(id=>{
+const el=document.getElementById(id);
+if(cnt>0){el.textContent=cnt;el.classList.remove('hidden');el.classList.add('flex','badge-bounce');setTimeout(()=>el.classList.remove('badge-bounce'),300);}
+else{el.classList.add('hidden');el.classList.remove('flex');}
+});
+}
+
+function scrollToCat(catId){
+setTimeout(()=>{
+const sec=document.getElementById('catSection_'+catId);
+if(sec)sec.scrollIntoView({behavior:'smooth',block:'start'});
+},100);
+}
+
+/* ===========================
+   AUTH
+   =========================== */
+function handleLogin(){
+const email=document.getElementById('loginEmail').value.trim().toLowerCase();
+const pass=document.getElementById('loginPass').value;
+if(!email||!pass)return toast('Please fill all fields','error');
+if(email===ADMIN_EMAIL&&pass===ADMIN_PASS){state.user={name:'Admin',email,isAdmin:true};saveState();showView('adminView');toast('Welcome, Admin!');return;}
+const users=JSON.parse(localStorage.getItem('bakalooo_users')||'[]');
+const u=users.find(x=>x.email===email&&x.password===pass);
+if(!u)return toast('Invalid email or password','error');
+state.user={name:u.name,email:u.email,phone:u.phone,address:u.address};saveState();showView('homeView');toast('Welcome back, '+u.name+'!');
+}
+
+function handleSignup(){
+const first=document.getElementById('signupFirst').value.trim();
+const last=document.getElementById('signupLast').value.trim();
+const email=document.getElementById('signupEmail').value.trim().toLowerCase();
+const phone=document.getElementById('signupPhone').value.trim();
+const pass=document.getElementById('signupPass').value;
+const addr=document.getElementById('signupAddress').value.trim();
+if(!first||!email||!phone||!pass||!addr)return toast('Please fill all fields','error');
+if(pass.length<6)return toast('Password must be at least 6 characters','error');
+if(!email.includes('@'))return toast('Enter a valid email','error');
+const users=JSON.parse(localStorage.getItem('bakalooo_users')||'[]');
+if(users.find(x=>x.email===email))return toast('Email already registered','error');
+const u={name:first+' '+(last||''),email,phone,password:pass,address:addr};
+users.push(u);localStorage.setItem('bakalooo_users',JSON.stringify(users));
+state.user={name:u.name,email:u.email,phone:u.phone,address:u.address};saveState();showView('homeView');toast('Welcome to Bakalooo, '+first+'!');
+}
+
+function handleLogout(){
+state.user=null;state.cart=[];state.appliedCoupon=null;saveState();showView('loginView');toast('Logged out successfully');
+}
+
+/* ===========================
+   ADDRESS
+   =========================== */
+function populateAddress(){
+if(!state.user)return;
+document.getElementById('addrName').value=state.user.name||'';
+document.getElementById('addrPhone').value=state.user.phone||'';
+const parts=(state.user.address||'').split('|');
+document.getElementById('addrLine').value=parts[0]||'';
+document.getElementById('addrCity').value=parts[1]||'';
+document.getElementById('addrPin').value=parts[2]||'';
+}
+function saveAddress(){
+const name=document.getElementById('addrName').value.trim();
+const phone=document.getElementById('addrPhone').value.trim();
+const line=document.getElementById('addrLine').value.trim();
+const city=document.getElementById('addrCity').value.trim();
+const pin=document.getElementById('addrPin').value.trim();
+if(!name||!phone||!line)return toast('Please fill required fields','error');
+const addr=line+(city?'|'+city:'')+(pin?'|'+pin:'');
+state.user.name=name;state.user.phone=phone;state.user.address=addr;
+const users=JSON.parse(localStorage.getItem('bakalooo_users')||'[]');
+const idx=users.findIndex(x=>x.email===state.user.email);
+if(idx>=0){users[idx].name=name;users[idx].phone=phone;users[idx].address=addr;localStorage.setItem('bakalooo_users',JSON.stringify(users));}
+saveState();toast('Address saved!');showView(state.prevView);
+}
+
+/* ===========================
+   HOME RENDERING
+   =========================== */
+function renderHome(){
+// Address bar
+const addr=(state.user?.address||'').split('|')[0];
+document.getElementById('homeAddress').textContent=addr||'Select delivery address...';
+// Offers
+renderOffersStrip();
+// Categories
+renderCategories();
+// Products by category
+renderProductsByCategory();
+updateCartBadge();
+}
+
+function renderOffersStrip(){
+const el=document.getElementById('offersStrip');
+if(!state.offers.length){el.innerHTML='';return;}
+let h='<div class="px-4"><h3 class="font-display font-700 text-lg text-g700 mb-3">Offers for You</h3><div class="offers-scroll flex gap-3 overflow-x-auto pb-2">';
+state.offers.forEach(o=>{
+h+=`<div class="flex-shrink-0 w-64 rounded-2xl p-4 text-white relative overflow-hidden" style="background:${o.color}">
+<div class="absolute -right-4 -top-4 w-24 h-24 rounded-full bg-white/10"></div>
+<div class="absolute -right-2 -bottom-6 w-20 h-20 rounded-full bg-white/10"></div>
+<p class="text-3xl font-display font-900">${o.discount}%</p>
+<p class="text-sm font-600 mt-1">${o.title}</p>
+<p class="text-xs opacity-80 mt-0.5">${o.desc}</p>
+ ${o.cat?`<span class="inline-block mt-2 text-[10px] bg-white/20 px-2 py-0.5 rounded-full capitalize">${o.cat}</span>`:''}
+</div>`;
+});
+h+='</div></div>';
+el.innerHTML=h;
+}
+
+function renderCategories(){
+const el=document.getElementById('catGrid');
+let h='';
+CATEGORIES.forEach(c=>{
+h+=`<button onclick="scrollToCat('${c.id}')" class="flex flex-col items-center gap-2 p-3 rounded-2xl bg-white shadow-sm active:scale-95 transition-transform">
+<div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background:${c.color}15">
+<i class="fas ${c.icon} text-xl" style="color:${c.color}"></i>
+</div>
+<span class="text-xs font-600 text-g600 text-center leading-tight">${c.name}</span>
+</button>`;
+});
+el.innerHTML=h;
+}
+
+function renderProductsByCategory(){
+const el=document.getElementById('productsSection');
+let h='';
+CATEGORIES.forEach(cat=>{
+const prods=state.products.filter(p=>p.cat===cat.id);
+if(!prods.length)return;
+h+=`<div id="catSection_${cat.id}" class="mb-6">
+<div class="flex items-center justify-between mb-3">
+<h3 class="font-display font-700 text-lg text-g700">${cat.name}</h3>
+<span class="text-xs text-g400 font-500">${prods.length} items</span>
+</div>
+<div class="grid grid-cols-2 gap-3">`;
+prods.forEach(p=>{
+const inCart=state.cart.find(c=>c.id===p.id);
+const disc=Math.round((1-p.price/p.mrp)*100);
+h+=`<div class="product-card bg-white rounded-2xl overflow-hidden shadow-sm border border-g50">
+<div class="relative h-28 bg-g50 flex items-center justify-center overflow-hidden">
+<img src="https://picsum.photos/seed/${p.img}/200/200" alt="${p.name}" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'">
+ ${disc>0?`<span class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-700 px-2 py-0.5 rounded-lg">${disc}% OFF</span>`:''}
+</div>
+<div class="p-3">
+<p class="text-sm font-600 text-g700 leading-tight">${p.name}</p>
+<p class="text-[11px] text-g400 mt-0.5">${p.unit?`1 ${p.unit} · `:''}${p.desc||''}</p>
+<div class="flex items-center justify-between mt-2">
+<div><span class="text-base font-700 text-g600">₹${p.price}</span>${p.mrp>p.price?`<span class="text-xs text-g300 line-through ml-1">₹${p.mrp}</span>`:''}</div>
+ ${inCart?`<div class="flex items-center gap-1.5">
+<button onclick="updateQty(${p.id},-1)" class="qty-btn w-7 h-7 rounded-lg bg-g100 text-g600 flex items-center justify-center text-sm font-700"><i class="fas fa-minus text-[10px]"></i></button>
+<span class="text-sm font-700 text-g700 w-5 text-center">${inCart.qty}</span>
+<button onclick="updateQty(${p.id},1)" class="qty-btn w-7 h-7 rounded-lg hero-gradient text-white flex items-center justify-center text-sm font-700"><i class="fas fa-plus text-[10px]"></i></button>
+</div>`:`<button onclick="addToCart(${p.id})" class="w-8 h-8 rounded-lg hero-gradient text-white flex items-center justify-center shadow-sm shadow-g400/30 active:scale-90 transition-transform"><i class="fas fa-plus text-xs"></i></button>`}
+</div>
+</div>
+</div>`;
+});
+h+='</div></div>';
+});
+el.innerHTML=h;
+}
+
+/* ===========================
+   CART
+   =========================== */
+function addToCart(id){
+const p=state.products.find(x=>x.id===id);if(!p)return;
+const existing=state.cart.find(c=>c.id===id);
+if(existing)existing.qty++;
+else state.cart.push({id,qty:1});
+saveState();updateCartBadge();renderHome();toast(p.name+' added to cart');
+}
+function updateQty(id,delta){
+const item=state.cart.find(c=>c.id===id);if(!item)return;
+item.qty+=delta;
+if(item.qty<=0)state.cart=state.cart.filter(c=>c.id!==id);
+saveState();updateCartBadge();renderCart();renderHome();
+}
+function removeFromCart(id){
+state.cart=state.cart.filter(c=>c.id!==id);
+saveState();updateCartBadge();renderCart();
+}
+
+function getCartTotal(){
+let subtotal=0;
+state.cart.forEach(item=>{
+const p=state.products.find(x=>x.id===item.id);
+if(p)subtotal+=p.price*item.qty;
+});
+return subtotal;
+}
+
+function renderCart(){
+const el=document.getElementById('cartContent');
+const footer=document.getElementById('cartFooter');
+document.getElementById('cartCount').textContent=state.cart.length?'('+state.cart.reduce((s,i)=>s+i.qty,0)+' items'):'';
+if(!state.cart.length){
+el.innerHTML=`<div class="flex flex-col items-center justify-center py-20">
+<div class="w-24 h-24 rounded-full bg-g50 flex items-center justify-center mb-4"><i class="fas fa-shopping-bag text-g200 text-4xl"></i></div>
+<p class="font-display font-700 text-g600 text-lg">Your cart is empty</p>
+<p class="text-g400 text-sm mt-1">Add items to get started</p>
+<button onclick="showView('homeView')" class="mt-6 px-6 py-3 hero-gradient text-white font-display font-600 rounded-xl shadow-lg shadow-g400/30">Browse Products</button>
+</div>`;
+footer.classList.add('hidden');return;
+}
+let h='';
+state.cart.forEach(item=>{
+const p=state.products.find(x=>x.id===item.id);if(!p)return;
+const disc=Math.round((1-p.price/p.mrp)*100);
+h+=`<div class="bg-white rounded-2xl p-3 flex gap-3 mb-3 shadow-sm">
+<img src="https://picsum.photos/seed/${p.img}/120/120" alt="${p.name}" class="w-20 h-20 rounded-xl object-cover flex-shrink-0" onerror="this.style.display='none'">
+<div class="flex-1 min-w-0">
+<p class="text-sm font-600 text-g700">${p.name}</p>
+<p class="text-xs text-g400 mt-0.5">${p.unit?`1 ${p.unit}`:''}</p>
+<div class="flex items-center justify-between mt-3">
+<div><span class="font-700 text-g600">₹${p.price*item.qty}</span>${p.mrp>p.price?`<span class="text-xs text-g300 line-through ml-1">₹${p.mrp*item.qty}</span>`:''}</div>
+<div class="flex items-center gap-2">
+<button onclick="updateQty(${p.id},-1)" class="qty-btn w-7 h-7 rounded-lg bg-g100 text-g600 flex items-center justify-center"><i class="fas fa-minus text-[10px]"></i></button>
+<span class="text-sm font-700 text-g700 w-5 text-center">${item.qty}</span>
+<button onclick="updateQty(${p.id},1)" class="qty-btn w-7 h-7 rounded-lg hero-gradient text-white flex items-center justify-center"><i class="fas fa-plus text-[10px]"></i></button>
+</div>
+</div>
+</div>
+<button onclick="removeFromCart(${p.id})" class="self-start w-8 h-8 rounded-lg bg-red-50 text-red-400 flex items-center justify-center flex-shrink-0"><i class="fas fa-trash-alt text-xs"></i></button>
+</div>`;
+});
+el.innerHTML=h;
+// Footer
+const sub=getCartTotal();
+const discAmt=sub>0?state.cart.reduce((s,item)=>{const p=state.products.find(x=>x.id===item.id);return s+(p?(p.mrp-p.price)*item.qty:0);},0):0;
+footer.classList.remove('hidden');
+footer.innerHTML=`<div class="space-y-2 mb-3 text-sm">
+<div class="flex justify-between"><span class="text-g400">Item Total</span><span class="text-g700 font-600">₹${sub+discAmt}</span></div>
+ ${discAmt>0?`<div class="flex justify-between"><span class="text-g400">Discount</span><span class="text-g400 font-600">- ₹${discAmt}</span></div>`:''}
+<div class="flex justify-between"><span class="text-g400">Delivery Fee</span><span class="text-g400 font-600 line-through">₹25</span></div>
+<div class="flex justify-between"><span class="text-g400">Delivery Charge</span><span class="text-g600 font-600">FREE</span></div>
+<div class="border-t border-g100 pt-2 flex justify-between"><span class="text-g700 font-700">Grand Total</span><span class="text-g600 font-800 text-lg">₹${sub}</span></div>
+</div>
+<button onclick="showView('checkoutView')" class="w-full py-3.5 hero-gradient text-white font-display font-700 rounded-xl shadow-lg shadow-g400/30 active:scale-[.97] transition-transform text-base">Proceed to Checkout</button>`;
+}
+
+/* ===========================
+   CHECKOUT
+   =========================== */
+function renderCheckout(){
+const el=document.getElementById('checkoutContent');
+const footer=document.getElementById('checkoutFooter');
+if(!state.cart.length){showView('cartView');return;}
+const addr=state.user?.address||'';
+const addrParts=addr.split('|');
+const sub=getCartTotal();
+let h=`<div class="space-y-4">
+<!-- Address -->
+<div class="bg-white rounded-2xl p-4 shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-display font-700 text-g600 text-sm"><i class="fas fa-location-dot mr-2 text-g400"></i>Delivery Address</h3>
+<button onclick="showView('addressView')" class="text-xs text-g500 font-600">Change</button>
+</div>
+<p class="text-sm text-g700 font-500">${state.user?.name||''}</p>
+<p class="text-sm text-g400 mt-0.5">${addrParts[0]||'No address set'}${addrParts[1]?', '+addrParts[1]:''}${addrParts[2]?' - '+addrParts[2]:''}</p>
+<p class="text-sm text-g400">${state.user?.phone||''}</p>
+</div>
+<!-- Coupon -->
+<div class="bg-white rounded-2xl p-4 shadow-sm">
+<h3 class="font-display font-700 text-g600 text-sm mb-3"><i class="fas fa-tag mr-2 text-g400"></i>Apply Coupon</h3>
+ ${state.appliedCoupon?`<div class="flex items-center justify-between bg-g50 rounded-xl px-4 py-3">
+<div><p class="font-700 text-g600 text-sm">${state.appliedCoupon.code}</p><p class="text-xs text-g400">${state.appliedCoupon.type==='percent'?state.appliedCoupon.value+'% off':'Flat ₹'+state.appliedCoupon.value+' off'}</p></div>
+<button onclick="removeCoupon()" class="text-red-400 text-sm font-600">Remove</button>
+</div>`:`<div class="flex gap-2">
+<input id="couponInput" type="text" placeholder="Enter coupon code" class="flex-1 px-4 py-2.5 border-2 border-g100 rounded-xl text-g700 bg-g50/50 placeholder-g300 text-sm uppercase">
+<button onclick="applyCoupon()" class="px-5 py-2.5 hero-gradient text-white font-600 rounded-xl text-sm active:scale-95 transition-transform">Apply</button>
+</div>`}
+<div class="mt-3 space-y-1.5">`;
+state.coupons.forEach(c=>{
+h+=`<div class="flex items-center justify-between text-xs border border-dashed border-g200 rounded-lg px-3 py-2">
+<div><span class="font-700 text-g600">${c.code}</span> <span class="text-g400">- ${c.type==='percent'?c.value+'% off':'₹'+c.value+' off'} (min ₹${c.minOrder})</span></div>
+</div>`;
+});
+h+=`</div></div>
+<!-- Payment -->
+<div class="bg-white rounded-2xl p-4 shadow-sm">
+<h3 class="font-display font-700 text-g600 text-sm mb-3"><i class="fas fa-wallet mr-2 text-g400"></i>Payment Method</h3>
+<div class="space-y-2">
+<label class="flex items-center gap-3 p-3 rounded-xl border-2 border-g400 bg-g50 cursor-pointer">
+<input type="radio" name="payment" value="cod" checked class="accent-g500">
+<div><p class="text-sm font-600 text-g700">Cash on Delivery</p><p class="text-xs text-g400">Pay when your order arrives</p></div>
+</label>
+<label class="flex items-center gap-3 p-3 rounded-xl border-2 border-g100 cursor-pointer has-[:checked]:border-g400 has-[:checked]:bg-g50 transition-all">
+<input type="radio" name="payment" value="upi" class="accent-g500">
+<div><p class="text-sm font-600 text-g700">UPI Payment</p><p class="text-xs text-g400">GPay, PhonePe, Paytm</p></div>
+</label>
+<label class="flex items-center gap-3 p-3 rounded-xl border-2 border-g100 cursor-pointer has-[:checked]:border-g400 has-[:checked]:bg-g50 transition-all">
+<input type="radio" name="payment" value="card" class="accent-g500">
+<div><p class="text-sm font-600 text-g700">Credit/Debit Card</p><p class="text-xs text-g400">Visa, Mastercard, Rupay</p></div>
+</label>
+<label class="flex items-center gap-3 p-3 rounded-xl border-2 border-g100 cursor-pointer has-[:checked]:border-g400 has-[:checked]:bg-g50 transition-all">
+<input type="radio" name="payment" value="netbanking" class="accent-g500">
+<div><p class="text-sm font-600 text-g700">Net Banking</p><p class="text-xs text-g400">All major banks</p></div>
+</label>
+</div>
+</div>
+<!-- Bill Summary -->
+<div class="bg-white rounded-2xl p-4 shadow-sm">
+<h3 class="font-display font-700 text-g600 text-sm mb-3"><i class="fas fa-receipt mr-2 text-g400"></i>Bill Summary</h3>
+<div class="space-y-2 text-sm">
+<div class="flex justify-between"><span class="text-g400">Item Total</span><span class="text-g700 font-600">₹${sub}</span></div>
+<div class="flex justify-between"><span class="text-g400">Delivery Fee</span><span class="text-g400 font-600 line-through">₹25</span></div>
+<div class="flex justify-between"><span class="text-g600 font-500">Delivery Charge</span><span class="text-g600 font-600">FREE</span></div>
+ ${state.appliedCoupon?`<div class="flex justify-between"><span class="text-g400">Coupon (${state.appliedCoupon.code})</span><span class="text-g400 font-600">- ₹${getCouponDiscount()}</span></div>`:''}
+<div class="border-t border-g100 pt-2 flex justify-between"><span class="text-g700 font-700">Grand Total</span><span class="text-g600 font-800 text-lg">₹${sub-getCouponDiscount()}</span></div>
+</div>
+</div>
+</div>`;
+el.innerHTML=h;
+
+const total=sub-getCouponDiscount();
+footer.innerHTML=`<button onclick="placeOrder()" class="w-full py-3.5 hero-gradient text-white font-display font-700 rounded-xl shadow-lg shadow-g400/30 active:scale-[.97] transition-transform text-base">Place Order · ₹${total}</button>`;
+}
+
+function getCouponDiscount(){
+if(!state.appliedCoupon)return 0;
+const sub=getCartTotal();
+const c=state.appliedCoupon;
+if(sub<c.minOrder)return 0;
+let disc=c.type==='percent'?Math.round(sub*c.value/100):c.value;
+if(c.maxDiscount>0)disc=Math.min(disc,c.maxDiscount);
+return disc;
+}
+
+function applyCoupon(){
+const code=document.getElementById('couponInput').value.trim().toUpperCase();
+if(!code)return toast('Enter a coupon code','error');
+const c=state.coupons.find(x=>x.code===code);
+if(!c)return toast('Invalid coupon code','error');
+const sub=getCartTotal();
+if(sub<c.minOrder)return toast('Min order ₹'+c.minOrder+' required','error');
+state.appliedCoupon=c;saveState();renderCheckout();toast('Coupon applied!');
+}
+function removeCoupon(){state.appliedCoupon=null;saveState();renderCheckout();toast('Coupon removed','info');}
+
+function placeOrder(){
+if(!state.user?.address||state.user.address.split('|')[0].trim()==='')return toast('Please add a delivery address','error');
+const pm=document.querySelector('input[name="payment"]:checked')?.value||'cod';
+const sub=getCartTotal();
+const couponDisc=getCouponDiscount();
+const total=sub-couponDisc;
+const order={
+id:state.nextOrId++,
+items:state.cart.map(i=>{const p=state.products.find(x=>x.id===i.id);return{...i,name:p?.name,price:p?.price,img:p?.img,unit:p?.unit};}),
+total,subtotal:sub,couponDisc,
+coupon:state.appliedCoupon?state.appliedCoupon.code:null,
+payment:pm,
+address:state.user.address,
+status:'confirmed',
+date:new Date().toISOString()
+};
+state.orders.unshift(order);
+state.cart=[];state.appliedCoupon=null;saveState();
+document.getElementById('successOrderId').textContent='Order ID: #'+order.id;
+showView('successView');
+}
+
+/* ===========================
+   SEARCH
+   =========================== */
+function handleSearch(q){renderSearch(q);}
+function renderSearch(q){
+const el=document.getElementById('searchResults');
+const query=q.toLowerCase().trim();
+if(!query){
+let h='<p class="text-g400 text-sm mb-4">Popular Searches</p><div class="flex flex-wrap gap-2">';
+CATEGORIES.forEach(c=>{h+=`<button onclick="document.getElementById('searchInput').value='${c.name}';handleSearch('${c.name}')" class="px-4 py-2 bg-white rounded-full text-sm text-g600 font-500 border border-g100">${c.name}</button>`;});
+h+='</div>';el.innerHTML=h;return;
+}
+const results=state.products.filter(p=>p.name.toLowerCase().includes(query)||p.cat.includes(query)||p.desc?.toLowerCase().includes(query));
+if(!results.length){el.innerHTML=`<div class="text-center py-16"><i class="fas fa-search text-g200 text-4xl mb-3"></i><p class="text-g400 font-500">No products found for "${q}"</p></div>`;return;}
+let h=`<p class="text-g400 text-sm mb-3">${results.length} results found</p><div class="grid grid-cols-2 gap-3">`;
+results.forEach(p=>{
+const inCart=state.cart.find(c=>c.id===p.id);
+const disc=Math.round((1-p.price/p.mrp)*100);
+h+=`<div class="product-card bg-white rounded-2xl overflow-hidden shadow-sm border border-g50">
+<div class="relative h-28 bg-g50 flex items-center justify-center overflow-hidden">
+<img src="https://picsum.photos/seed/${p.img}/200/200" alt="${p.name}" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'">
+ ${disc>0?`<span class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-700 px-2 py-0.5 rounded-lg">${disc}% OFF</span>`:''}
+</div>
+<div class="p-3">
+<p class="text-sm font-600 text-g700 leading-tight">${p.name}</p>
+<div class="flex items-center justify-between mt-2">
+<div><span class="text-base font-700 text-g600">₹${p.price}</span></div>
+ ${inCart?`<div class="flex items-center gap-1.5">
+<button onclick="updateQty(${p.id},-1)" class="qty-btn w-7 h-7 rounded-lg bg-g100 text-g600 flex items-center justify-center"><i class="fas fa-minus text-[10px]"></i></button>
+<span class="text-sm font-700 text-g700 w-5 text-center">${inCart.qty}</span>
+<button onclick="updateQty(${p.id},1)" class="qty-btn w-7 h-7 rounded-lg hero-gradient text-white flex items-center justify-center"><i class="fas fa-plus text-[10px]"></i></button>
+</div>`:`<button onclick="addToCart(${p.id})" class="w-8 h-8 rounded-lg hero-gradient text-white flex items-center justify-center shadow-sm shadow-g400/30 active:scale-90 transition-transform"><i class="fas fa-plus text-xs"></i></button>`}
+</div>
+</div>
+</div>`;
+});
+h+='</div>';el.innerHTML=h;
+}
+
+/* ===========================
+   ORDERS
+   =========================== */
+function renderOrders(){
+const el=document.getElementById('ordersContent');
+if(!state.orders.length){el.innerHTML=`<div class="flex flex-col items-center justify-center py-20">
+<div class="w-24 h-24 rounded-full bg-g50 flex items-center justify-center mb-4"><i class="fas fa-receipt text-g200 text-4xl"></i></div>
+<p class="font-display font-700 text-g600 text-lg">No orders yet</p>
+<p class="text-g400 text-sm mt-1">Your order history will appear here</p>
+<button onclick="showView('homeView')" class="mt-6 px-6 py-3 hero-gradient text-white font-display font-600 rounded-xl shadow-lg shadow-g400/30">Start Shopping</button>
+</div>`;return;}
+let h='';
+state.orders.forEach(o=>{
+const statusColors={confirmed:'text-blue-500',preparing:'text-yellow-500','on the way':'text-orange-500',delivered:'text-g500'};
+const sc=statusColors[o.status]||'text-g400';
+const d=new Date(o.date);
+h+=`<div class="bg-white rounded-2xl p-4 mb-3 shadow-sm">
+<div class="flex items-center justify-between mb-3">
+<div><p class="font-700 text-g700 text-sm">Order #${o.id}</p><p class="text-xs text-g400">${d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})} · ${d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})}</p></div>
+<span class="text-xs font-700 ${sc} uppercase">${o.status}</span>
+</div>
+<div class="flex gap-2 overflow-x-auto cat-scroll pb-1">`;
+o.items.forEach(item=>{
+h+=`<div class="flex-shrink-0 w-14 h-14 rounded-xl bg-g50 overflow-hidden"><img src="https://picsum.photos/seed/${item.img}/80/80" class="w-full h-full object-cover" onerror="this.style.display='none'"></div>`;
+});
+h+=`</div>
+<div class="flex items-center justify-between mt-3 pt-3 border-t border-g50">
+<div><p class="text-xs text-g400">${o.items.reduce((s,i)=>s+i.qty,0)} items · ${o.payment==='cod'?'Cash on Delivery':o.payment==='upi'?'UPI':o.payment==='card'?'Card':'Net Banking'}</p>
+ ${o.coupon?`<p class="text-xs text-g400">Coupon: ${o.coupon}</p>`:''}</div>
+<p class="font-display font-800 text-g600">₹${o.total}</p>
+</div>
+</div>`;
+});
+el.innerHTML=h;
+}
+
+/* ===========================
+   PROFILE
+   =========================== */
+function renderProfile(){
+if(!state.user)return;
+document.getElementById('profileAvatar').textContent=(state.user.name||'U')[0].toUpperCase();
+document.getElementById('profileName').textContent=state.user.name||'User';
+document.getElementById('profileEmail').textContent=state.user.email;
+document.getElementById('profilePhone').textContent=state.user.phone||'';
+document.getElementById('profileAddr').textContent=(state.user.address||'').split('|')[0]||'Add your address';
+}
+
+/* ===========================
+   ADMIN
+   =========================== */
+function renderAdmin(){
+renderAdminStats();
+switchAdminTab(state.adminTab);
+}
+
+function renderAdminStats(){
+const el=document.getElementById('adminStats');
+const totalOrders=state.orders.length;
+const totalRevenue=state.orders.reduce((s,o)=>s+o.total,0);
+el.innerHTML=`
+<div class="bg-white rounded-2xl p-3 text-center shadow-sm">
+<p class="text-2xl font-display font-900 text-g600">${state.products.length}</p>
+<p class="text-[10px] text-g400 font-600 mt-0.5">Products</p>
+</div>
+<div class="bg-white rounded-2xl p-3 text-center shadow-sm">
+<p class="text-2xl font-display font-900 text-g600">${totalOrders}</p>
+<p class="text-[10px] text-g400 font-600 mt-0.5">Orders</p>
+</div>
+<div class="bg-white rounded-2xl p-3 text-center shadow-sm">
+<p class="text-2xl font-display font-900 text-g600">₹${totalRevenue}</p>
+<p class="text-[10px] text-g400 font-600 mt-0.5">Revenue</p>
+</div>`;
+}
+
+function switchAdminTab(tab){
+state.adminTab=tab;
+document.querySelectorAll('.admin-tab').forEach(t=>{
+const isActive=t.dataset.tab===tab;
+t.classList.toggle('bg-g500',isActive);
+t.classList.toggle('text-white',isActive);
+t.classList.toggle('text-g400',!isActive);
+});
+const el=document.getElementById('adminTabContent');
+if(tab==='products')renderAdminProducts(el);
+else if(tab==='offers')renderAdminOffers(el);
+else if(tab==='coupons')renderAdminCoupons(el);
+else if(tab==='orders')renderAdminOrders(el);
+}
+
+function renderAdminProducts(el){
+let h=`<button onclick="openProductModal()" class="w-full py-3 hero-gradient text-white font-display font-600 rounded-xl shadow-lg shadow-g400/30 active:scale-[.97] transition-transform mb-4"><i class="fas fa-plus mr-2"></i>Add New Product</button>`;
+CATEGORIES.forEach(cat=>{
+const prods=state.products.filter(p=>p.cat===cat.id);
+if(!prods.length)return;
+h+=`<div class="mb-5"><h4 class="font-display font-700 text-sm text-g600 mb-2 capitalize">${cat.name} (${prods.length})</h4><div class="space-y-2">`;
+prods.forEach(p=>{
+h+=`<div class="bg-white rounded-xl p-3 flex items-center gap-3 shadow-sm">
+<img src="https://picsum.photos/seed/${p.img}/80/80" class="w-12 h-12 rounded-lg object-cover flex-shrink-0" onerror="this.style.display='none'">
+<div class="flex-1 min-w-0">
+<p class="text-sm font-600 text-g700 truncate">${p.name}</p>
+<p class="text-xs text-g400">₹${p.price} · ${p.unit} ${p.mrp>p.price?'<span class=text-red-400>₹'+p.mrp+'</span>':''}</p>
+</div>
+<div class="flex gap-1.5">
+<button onclick="editProduct(${p.id})" class="w-8 h-8 rounded-lg bg-g50 text-g500 flex items-center justify-center"><i class="fas fa-pen text-xs"></i></button>
+<button onclick="deleteProduct(${p.id})" class="w-8 h-8 rounded-lg bg-red-50 text-red-400 flex items-center justify-center"><i class="fas fa-trash text-xs"></i></button>
+</div>
+</div>`;
+});
+h+='</div></div>';
+});
+el.innerHTML=h;
+}
+
+function renderAdminOffers(el){
+let h=`<button onclick="openOfferModal()" class="w-full py-3 hero-gradient text-white font-display font-600 rounded-xl shadow-lg shadow-g400/30 active:scale-[.97] transition-transform mb-4"><i class="fas fa-plus mr-2"></i>Add New Offer</button>`;
+if(!state.offers.length){h+=`<p class="text-center text-g400 py-10">No offers yet</p>`;el.innerHTML=h;return;}
+h+='<div class="space-y-3">';
+state.offers.forEach(o=>{
+h+=`<div class="bg-white rounded-xl p-4 flex items-center gap-4 shadow-sm">
+<div class="w-14 h-14 rounded-xl flex items-center justify-center text-white font-display font-900 text-lg flex-shrink-0" style="background:${o.color}">${o.discount}%</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-600 text-g700">${o.title}</p>
+<p class="text-xs text-g400">${o.desc}</p>
+ ${o.cat?`<span class="inline-block mt-1 text-[10px] bg-g50 text-g500 px-2 py-0.5 rounded-full capitalize">${o.cat}</span>`:'<span class="inline-block mt-1 text-[10px] bg-g50 text-g500 px-2 py-0.5 rounded-full">All Categories</span>'}
+</div>
+<button onclick="deleteOffer(${o.id})" class="w-8 h-8 rounded-lg bg-red-50 text-red-400 flex items-center justify-center flex-shrink-0"><i class="fas fa-trash text-xs"></i></button>
+</div>`;
+});
+h+='</div>';el.innerHTML=h;
+}
+
+function renderAdminCoupons(el){
+let h=`<button onclick="openCouponModal()" class="w-full py-3 hero-gradient text-white font-display font-600 rounded-xl shadow-lg shadow-g400/30 active:scale-[.97] transition-transform mb-4"><i class="fas fa-plus mr-2"></i>Add New Coupon</button>`;
+if(!state.coupons.length){h+=`<p class="text-center text-g400 py-10">No coupons yet</p>`;el.innerHTML=h;return;}
+h+='<div class="space-y-3">';
+state.coupons.forEach(c=>{
+h+=`<div class="bg-white rounded-xl p-4 shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="px-3 py-1.5 border-2 border-dashed border-g300 rounded-lg"><span class="font-display font-800 text-g600 text-sm">${c.code}</span></div>
+<div>
+<p class="text-sm font-600 text-g700">${c.type==='percent'?c.value+'% off':'Flat ₹'+c.value+' off'}</p>
+<p class="text-xs text-g400">Min order: ₹${c.minOrder}${c.maxDiscount>0?' · Max discount: ₹'+c.maxDiscount:''}</p>
+</div>
+</div>
+<button onclick="deleteCoupon(${c.id})" class="w-8 h-8 rounded-lg bg-red-50 text-red-400 flex items-center justify-center flex-shrink-0"><i class="fas fa-trash text-xs"></i></button>
+</div>
+</div>`;
+});
+h+='</div>';el.innerHTML=h;
+}
+
+function renderAdminOrders(el){
+if(!state.orders.length){el.innerHTML=`<p class="text-center text-g400 py-10">No orders yet</p>`;return;}
+const statuses=['confirmed','preparing','on the way','delivered'];
+let h='<div class="space-y-3">';
+state.orders.forEach(o=>{
+const sc={confirmed:'bg-blue-50 text-blue-600',preparing:'bg-yellow-50 text-yellow-600','on the way':'bg-orange-50 text-orange-600',delivered:'bg-g50 text-g600'};
+const d=new Date(o.date);
+h+=`<div class="bg-white rounded-xl p-4 shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<div><p class="font-700 text-g700 text-sm">Order #${o.id}</p><p class="text-xs text-g400">${d.toLocaleDateString('en-IN',{day:'numeric',month:'short'})} ${d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})}</p></div>
+<span class="text-[10px] font-700 px-2 py-1 rounded-lg ${sc[o.status]||''}">${o.status.toUpperCase()}</span>
+</div>
+<p class="text-xs text-g400 mb-2">${o.items.map(i=>i.name+' x'+i.qty).join(', ')}</p>
+<div class="flex items-center justify-between">
+<p class="font-display font-800 text-g600">₹${o.total}</p>
+<select onchange="updateOrderStatus(${o.id},this.value)" class="text-xs border border-g100 rounded-lg px-2 py-1.5 text-g600 font-600 bg-white">
+ ${statuses.map(s=>`<option value="${s}" ${o.status===s?'selected':''}>${s.charAt(0).toUpperCase()+s.slice(1)}</option>`).join('')}
+</select>
+</div>
+</div>`;
+});
+h+='</div>';el.innerHTML=h;
+}
+
+function updateOrderStatus(id,status){
+const o=state.orders.find(x=>x.id===id);
+if(o){o.status=status;saveState();toast('Order #'+id+' → '+status);}
+}
+
+/* ===========================
+   ADMIN PRODUCT MODAL
+   =========================== */
+function openProductModal(id){
+const modal=document.getElementById('productModal');
+modal.classList.remove('hidden');
+document.getElementById('modalTitle').textContent=id?'Edit Product':'Add Product';
+document.getElementById('editProductId').value=id||'';
+// Populate category select
+const catSel=document.getElementById('pCat');
+catSel.innerHTML=CATEGORIES.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+if(id){
+const p=state.products.find(x=>x.id===id);
+if(p){document.getElementById('pName').value=p.name;document.getElementById('pCat').value=p.cat;document.getElementById('pUnit').value=p.unit;document.getElementById('pPrice').value=p.price;document.getElementById('pMrp').value=p.mrp;document.getElementById('pImg').value=p.img;document.getElementById('pDesc').value=p.desc||'';}
+}else{document.getElementById('pName').value='';document.getElementById('pPrice').value='';document.getElementById('pMrp').value='';document.getElementById('pImg').value='';document.getElementById('pDesc').value='';}
+document.getElementById('pImgPreview').classList.add('hidden');
+}
+function closeProductModal(){document.getElementById('productModal').classList.add('hidden');}
+
+function previewProductImg(){
+const kw=document.getElementById('pImg').value.trim();
+if(!kw)return toast('Enter an image keyword','error');
+document.getElementById('pImgPreview').classList.remove('hidden');
+document.getElementById('pImgPreviewSrc').src='https://picsum.photos/seed/'+kw+'/200/200';
+}
+
+function saveProduct(){
+const id=document.getElementById('editProductId').value;
+const name=document.getElementById('pName').value.trim();
+const cat=document.getElementById('pCat').value;
+const unit=document.getElementById('pUnit').value;
+const price=parseFloat(document.getElementById('pPrice').value);
+const mrp=parseFloat(document.getElementById('pMrp').value);
+const img=document.getElementById('pImg').value.trim();
+const desc=document.getElementById('pDesc').value.trim();
+if(!name||!price)return toast('Name and price are required','error');
+if(id){
+const p=state.products.find(x=>x.id===parseInt(id));
+if(p){Object.assign(p,{name,cat,unit,price,mrp:mrp||price,img:img||name.toLowerCase().replace(/\s/g,'-'),desc});}
+toast('Product updated');
+}else{
+state.products.push({id:state.nextPid++,name,cat,unit,price,mrp:mrp||price,img:img||name.toLowerCase().replace(/\s/g,'-'),desc});
+toast('Product added');
+}
+saveState();closeProductModal();renderAdmin();
+}
+
+function editProduct(id){openProductModal(id);}
+function deleteProduct(id){
+state.products=state.products.filter(p=>p.id!==id);
+state.cart=state.cart.filter(c=>c.id!==id);
+saveState();renderAdmin();toast('Product deleted');
+}
+
+/* ===========================
+   ADMIN OFFER MODAL
+   =========================== */
+function openOfferModal(){
+document.getElementById('offerModal').classList.remove('hidden');
+document.getElementById('oTitle').value='';document.getElementById('oDesc').value='';document.getElementById('oDiscount').value='';document.getElementById('oColor').value='#0d6b3f';
+const sel=document.getElementById('oCat');
+sel.innerHTML='<option value="">All Categories</option>'+CATEGORIES.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+}
+function closeOfferModal(){document.getElementById('offerModal').classList.add('hidden');}
+function saveOffer(){
+const title=document.getElementById('oTitle').value.trim();
+const desc=document.getElementById('oDesc').value.trim();
+const discount=parseInt(document.getElementById('oDiscount').value);
+const color=document.getElementById('oColor').value;
+const cat=document.getElementById('oCat').value;
+if(!title||!discount)return toast('Title and discount are required','error');
+state.offers.push({id:state.nextOid++,title,desc,discount,color,cat});
+saveState();closeOfferModal();renderAdmin();toast('Offer added');
+}
+function deleteOffer(id){state.offers=state.offers.filter(o=>o.id!==id);saveState();renderAdmin();toast('Offer deleted');}
+
+/* ===========================
+   ADMIN COUPON MODAL
+   =========================== */
+function openCouponModal(){
+document.getElementById('couponModal').classList.remove('hidden');
+document.getElementById('cCode').value='';document.getElementById('cType').value='percent';document.getElementById('cValue').value='';document.getElementById('cMin').value='';document.getElementById('cMax').value='0';
+}
+function closeCouponModal(){document.getElementById('couponModal').classList.add('hidden');}
+function saveCoupon(){
+const code=document.getElementById('cCode').value.trim().toUpperCase();
+const type=document.getElementById('cType').value;
+const value=parseFloat(document.getElementById('cValue').value);
+const minOrder=parseFloat(document.getElementById('cMin').value);
+const maxDiscount=parseFloat(document.getElementById('cMax').value)||0;
+if(!code||!value||!minOrder)return toast('All fields are required','error');
+if(state.coupons.find(c=>c.code===code))return toast('Coupon code already exists','error');
+state.coupons.push({id:state.nextCid++,code,type,value,minOrder,maxDiscount});
+saveState();closeCouponModal();renderAdmin();toast('Coupon added');
+}
+function deleteCoupon(id){state.coupons=state.coupons.filter(c=>c.id!==id);saveState();renderAdmin();toast('Coupon deleted');}
+
+/* ===========================
+   INIT
+   =========================== */
+function init(){
+loadState();
+// Simulate order status changes
+state.orders.forEach(o=>{
+if(o.status!=='delivered'){
+const mins=(Date.now()-new Date(o.date).getTime())/60000;
+if(mins>30)o.status='delivered';
+else if(mins>15)o.status='on the way';
+else if(mins>5)o.status='preparing';
+}
+});
+saveState();
+// Show splash then route
+setTimeout(()=>{
+if(state.user){
+if(state.user.isAdmin)showView('adminView');
+else showView('homeView');
+}else{showView('loginView');}
+},1800);
+}
+
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
